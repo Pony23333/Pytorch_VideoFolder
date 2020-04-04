@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="21eefc2a-21e8-4295-be5a-982c59f6c2ba" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1a4NpB4jIi83CdtNkwkAgRNLoj5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/anaconda3/bin" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="21eefc2a-21e8-4295-be5a-982c59f6c2ba" name="Default Changelist" comment="" />
+      <created>1585991086739</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585991086739</updated>
+      <workItem from="1585991107681" duration="3723000" />
+      <workItem from="1586001631066" duration="4400000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="898" y="305" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1586001610601">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="898" y="305" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1536.864@0.0.1536.864" timestamp="1586001610601" />
+    <state x="819" y="190" key="FileChooserDialogImpl" timestamp="1586001609104">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="819" y="190" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1586001609104" />
+    <state x="477" y="81" key="SettingsEditor" timestamp="1586001487718">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="477" y="81" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1586001487718" />
+    <state x="831" y="260" key="com.intellij.ide.util.TipDialog" timestamp="1586001673426">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="831" y="260" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1586001673426" />
+    <state x="813" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1586006206259">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="813" y="185" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1586006206259" />
+  </component>
+</project>
