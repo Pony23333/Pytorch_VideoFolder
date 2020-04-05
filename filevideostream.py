@@ -21,15 +21,17 @@ else:
 
 
 class FileVideoStream:
-    def __init__(self, path, size, length=10, queue_size=128):
+    def __init__(self, path, size, length=10):
         # initialize the file video stream along with the boolean
         # used to indicate if the thread should be stopped or not
+        # note that as this is for sampling from video, the maxsize
+        # of the queue can never exceed the length
         self.stream = cv2.VideoCapture(path)
         self.stopped = False
 
         # initialize the queue used to store frames read from
         # the video file
-        self.Q = Queue(maxsize=queue_size)
+        self.Q = Queue(maxsize=length)
         # intialize thread
         self.thread = Thread(target=self.update, args=())
         self.thread.daemon = True
@@ -55,33 +57,28 @@ class FileVideoStream:
             # thread
             if self.stopped:
                 break
+            # read the next frame from the file
+            self.stream.set(cv2.CAP_PROP_POS_FRAMES, count * rate)
+            ret, frame = self.stream.read()
+            if ret:
+                # center crop the frame
+                i = int(round((self.h - self.size[0]) / 2.))
+                j = int(round((self.w - self.size[1]) / 2.))
+                frame = frame[i:-i, j:-j, :]
+                count += 1
 
-            # otherwise, ensure the queue has room in it
-            if not self.Q.full():
-                # read the next frame from the file
-                self.stream.set(cv2.CAP_PROP_POS_FRAMES, count * rate)
-                ret, frame = self.stream.read()
-                if ret:
-                    # center crop the frame
-                    i = int(round((self.h - self.size[0]) / 2.))
-                    j = int(round((self.w - self.size[1]) / 2.))
-                    frame = frame[i:-i, j:-j, :]
-                    count += 1
+            # if the `ret` boolean is `False`, then we have
+            # reached the end of the video file
+            if not ret:
+                print("Video {} is Skipped!".format(self.path))
+                self.stopped = True
 
-                # if the `ret` boolean is `False`, then we have
-                # reached the end of the video file
-                if not ret:
-                    print("Video {} is Skipped!".format(self.path))
-                    self.stopped = True
+            if count >= self.length:
+                self.stopped = True
 
-                if count >= self.length:
-                    self.stopped = True
-                    print('loaded video {}'.format(self.path))
+            # add the frame to the queue
+            self.Q.put(frame)
 
-                # add the frame to the queue
-                self.Q.put(frame)
-            else:
-                time.sleep(0.1)  # Rest for 10ms, we have a full queue
 
         self.stream.release()
 
@@ -89,11 +86,6 @@ class FileVideoStream:
         # return next frame in the queue
         return self.Q.get()
 
-    # Insufficient to have consumer use while(more()) which does
-    # not take into account if the producer has reached end of
-    # file stream.
-    def running(self):
-        return self.more() or not self.stopped
 
     def more(self):
         # return True if there are still frames in the queue. If stream is not stopped, try to wait a moment

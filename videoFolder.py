@@ -141,8 +141,8 @@ if __name__ == '__main__':
     val_size = len(full_dataset) - train_size
     dataset_tr, dataset_val = torch.utils.data.random_split(full_dataset, [train_size, val_size])
 
-    dl = torch.utils.data.DataLoader(dataset_tr, batch_size=batch_size, shuffle=True, num_workers=0, pin_memory=True)
-    vdl = torch.utils.data.DataLoader(dataset_val, batch_size=batch_size, shuffle=True, num_workers=0, pin_memory=True)
+    dl = torch.utils.data.DataLoader(dataset_tr, batch_size=batch_size, shuffle=True, num_workers=8, pin_memory=True)
+    vdl = torch.utils.data.DataLoader(dataset_val, batch_size=batch_size, shuffle=True, num_workers=8, pin_memory=True)
 
     dataloader = {'train': dl, 'val': vdl}
 
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     for i in dl:
         print('loading the {}th video'.format(count))
         count+=1
-        if count>= 99:
+        if count>= 9:
             end_time = time.time()
             break
     print('time cost', end_time - start_time, 's')
