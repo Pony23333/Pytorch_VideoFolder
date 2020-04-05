@@ -9,6 +9,8 @@ import os.path
 import numpy as np
 import cv2
 import torch
+from filevideostream import FileVideoStream
+
 VIDEO_EXTENSIONS = ('.mp4','avi','rmvb')
 
 
@@ -56,33 +58,21 @@ def video_loader(path, size, model='2d',length=10):
     :return: a np.array whose shape depends on model
     '''
 
-    cap = cv2.VideoCapture(path)
-    h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-    w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-    num_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+
+    # print('start loading video {}'.format(path))
     if not isinstance(size,tuple):
         size = (size,size)
 
+    fvs = FileVideoStream(path, size).start()
+
     frames = np.zeros((length, size[0], size[1], 3))
-    rate = int(num_frames/length)
-    for f in range(length):
-        cap.set(cv2.CAP_PROP_POS_FRAMES, f*rate)
-        ret, frame = cap.read()
-        # if the frame is read successfully
-        if ret:
-            # center crop the frame
-            i = int(round((h - size[0]) / 2.))
-            j = int(round((w - size[1]) / 2.))
-            frame = frame[i:-i, j:-j, :]
-            frames[f, :, :, :] = frame
-
-
-        else:
-            print("Video {} is Skipped!".format(path))
-            break
+    count = 0
+    while fvs.more():
+        frames[count,:,:,:] = fvs.read()
+        count+=1
 
     frames = frames.astype('float32')
-
+    # print('successfully loaded video {}'.format(path))
     # 2d -> return TxCxHxW
     if model=='2d':
         return frames.transpose([0, 3, 1, 2])
@@ -151,7 +141,7 @@ if __name__ == '__main__':
     for i in dl:
         print('loading the {}th video'.format(count))
         count+=1
-        if count>= 99:
+        if count > 99:
             end_time = time.time()
             break
     print('time cost', end_time - start_time, 's')

@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="21eefc2a-21e8-4295-be5a-982c59f6c2ba" name="Default Changelist" comment="" />
+    <list default="true" id="21eefc2a-21e8-4295-be5a-982c59f6c2ba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fasterVideoFolder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/filevideostream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/VideoFolder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/VideoFolder.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/videoFolder.py" beforeDir="false" afterPath="$PROJECT_DIR$/videoFolder.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +23,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1a4NpB4jIi83CdtNkwkAgRNLoj5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,8 +35,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/anaconda3/bin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ddn-dev" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -31,6 +45,30 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="VideoFolder" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -43,7 +81,8 @@
       <option name="presentableId" value="Default" />
       <updated>1585991086739</updated>
       <workItem from="1585991107681" duration="3723000" />
-      <workItem from="1586001631066" duration="4400000" />
+      <workItem from="1586001631066" duration="9473000" />
+      <workItem from="1586046581759" duration="5832000" />
     </task>
     <servers />
   </component>
@@ -55,18 +94,18 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="898" y="305" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1536.864@0.0.1536.864" timestamp="1586001610601" />
-    <state x="819" y="190" key="FileChooserDialogImpl" timestamp="1586001609104">
+    <state x="819" y="190" key="FileChooserDialogImpl" timestamp="1586048092638">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="819" y="190" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1586001609104" />
+    <state x="819" y="190" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1586048092638" />
     <state x="477" y="81" key="SettingsEditor" timestamp="1586001487718">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="477" y="81" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1586001487718" />
-    <state x="831" y="260" key="com.intellij.ide.util.TipDialog" timestamp="1586001673426">
+    <state x="831" y="260" key="com.intellij.ide.util.TipDialog" timestamp="1586046714671">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="831" y="260" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1586001673426" />
+    <state x="831" y="260" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1586046714671" />
     <state x="813" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1586006206259">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
