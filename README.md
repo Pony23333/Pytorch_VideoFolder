@@ -13,3 +13,10 @@ older version could be find at https://stackoverflow.com/questions/33650974/open
 
 ## To do
 The video loading could be accelarated by using another thread. But a lot of work need to be done for Queue structure in Python3.
+
+
+## Update
+As currently I'm solving a video classfication task where the data I got for each category is extremely inbalanced,
+I modified this videofolder to give it ability of handling unbalanced cases. Generally, the idea is get the size of each category
+and find the minimum size. Then a threshold can be set as p*min_size where p is the portion e.g. 1.2. If a dataset contains more files
+than this threshold, only a certain number of files will be randomly (without replacement) loaded to the dataset. 
