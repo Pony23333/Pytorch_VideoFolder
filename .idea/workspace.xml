@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="21eefc2a-21e8-4295-be5a-982c59f6c2ba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fasterVideoFolder.py" beforeDir="false" afterPath="$PROJECT_DIR$/fasterVideoFolder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/filevideostream.py" beforeDir="false" afterPath="$PROJECT_DIR$/filevideostream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/videoFolder.py" beforeDir="false" afterPath="$PROJECT_DIR$/videoFolder.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ddn-dev" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -43,6 +41,25 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
+    <configuration name="VideoFolder" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="VideoFolder" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\Acer\anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="VideoFolder" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,7 +95,8 @@
       <updated>1585991086739</updated>
       <workItem from="1585991107681" duration="3723000" />
       <workItem from="1586001631066" duration="9473000" />
-      <workItem from="1586046581759" duration="7576000" />
+      <workItem from="1586046581759" duration="8262000" />
+      <workItem from="1587259619286" duration="4436000" />
     </task>
     <servers />
   </component>
@@ -86,14 +104,51 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="-1266" y="231" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587259689143">
+      <screen x="-1440" y="126" width="1440" height="900" />
+    </state>
+    <state x="-1266" y="231" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259689143" />
     <state x="898" y="305" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1586001610601">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="898" y="305" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1536.864@0.0.1536.864" timestamp="1586001610601" />
-    <state x="819" y="190" key="FileChooserDialogImpl" timestamp="1586048092638">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="-672" y="324" key="FileChooserDialogImpl" timestamp="1587259683502">
+      <screen x="-1440" y="126" width="1440" height="900" />
     </state>
+    <state x="-672" y="324" key="FileChooserDialogImpl/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259683502" />
     <state x="819" y="190" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1586048092638" />
+    <state width="1397" height="291" key="GridCell.Tab.0.bottom" timestamp="1587259733800">
+      <screen x="-1440" y="126" width="1440" height="900" />
+    </state>
+    <state width="1397" height="291" key="GridCell.Tab.0.bottom/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259733800" />
+    <state width="1397" height="291" key="GridCell.Tab.0.center" timestamp="1587259733800">
+      <screen x="-1440" y="126" width="1440" height="900" />
+    </state>
+    <state width="1397" height="291" key="GridCell.Tab.0.center/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259733800" />
+    <state width="1397" height="291" key="GridCell.Tab.0.left" timestamp="1587259733800">
+      <screen x="-1440" y="126" width="1440" height="900" />
+    </state>
+    <state width="1397" height="291" key="GridCell.Tab.0.left/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259733800" />
+    <state width="1397" height="291" key="GridCell.Tab.0.right" timestamp="1587259733800">
+      <screen x="-1440" y="126" width="1440" height="900" />
+    </state>
+    <state width="1397" height="291" key="GridCell.Tab.0.right/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259733800" />
+    <state width="1397" height="291" key="GridCell.Tab.1.bottom" timestamp="1587259733800">
+      <screen x="-1440" y="126" width="1440" height="900" />
+    </state>
+    <state width="1397" height="291" key="GridCell.Tab.1.bottom/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259733800" />
+    <state width="1397" height="291" key="GridCell.Tab.1.center" timestamp="1587259733800">
+      <screen x="-1440" y="126" width="1440" height="900" />
+    </state>
+    <state width="1397" height="291" key="GridCell.Tab.1.center/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259733800" />
+    <state width="1397" height="291" key="GridCell.Tab.1.left" timestamp="1587259733800">
+      <screen x="-1440" y="126" width="1440" height="900" />
+    </state>
+    <state width="1397" height="291" key="GridCell.Tab.1.left/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259733800" />
+    <state width="1397" height="291" key="GridCell.Tab.1.right" timestamp="1587259733800">
+      <screen x="-1440" y="126" width="1440" height="900" />
+    </state>
+    <state width="1397" height="291" key="GridCell.Tab.1.right/0.0.1536.864/-1440.126.1440.900@-1440.126.1440.900" timestamp="1587259733800" />
     <state x="477" y="81" key="SettingsEditor" timestamp="1586001487718">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -106,5 +161,8 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="813" y="185" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1586006206259" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/VideoFolder$VideoFolder.coverage" NAME="VideoFolder Coverage Results" MODIFIED="1587259698359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

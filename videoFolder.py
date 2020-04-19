@@ -9,6 +9,9 @@ import os.path
 import numpy as np
 import cv2
 import torch
+import random
+
+
 VIDEO_EXTENSIONS = ('.mp4','avi','rmvb')
 
 
@@ -23,25 +26,11 @@ def find_classes(dir):
     class_to_idx = {classes[i]: i for i in range(len(classes))}
     return classes, class_to_idx
 
-def make_dataset(dir, class_to_idx):
-    ''' This function is for making dataset when data is saved under directory with correct naming.
-    The return value is a tuple: (class, file_path)'''
 
-    videos = []
-    dir = os.path.expanduser(dir) # expand the user's home directory to a absolute path
-    for target in sorted(os.listdir(dir)):
-        d = os.path.join(dir, target)
-        if not os.path.isdir(d):
-            continue
 
-        for root, _, fnames in sorted(os.walk(d)):
-            for fname in fnames:
-                if is_video_file(fname):
-                    path = os.path.join(root, fname)
-                    item = (path, class_to_idx[target])
-                    videos.append(item)
 
-    return videos
+
+
 
 def video_loader(path, size, model='2d',length=10):
     '''
@@ -89,6 +78,9 @@ def video_loader(path, size, model='2d',length=10):
     # 3d -> return CxTxHxW
     return frames.transpose([3, 0, 1, 2])
 
+
+
+
 class VideoFolder(data.Dataset):
     '''
     A class of Dataset.
@@ -96,10 +88,11 @@ class VideoFolder(data.Dataset):
     :param model: 2d -> return TxCxHxW. 3d -> return CxTxHxW
     :param transform: for data augmentation
     '''
-    def __init__(self, root, model='2d', transform=None, target_transform=None,
+    def __init__(self, root, model='2d', balanced=False, transform=None, target_transform=None,
                  loader=video_loader, size=112):
         classes, class_to_idx = find_classes(root)
-        self.videos = make_dataset(root,class_to_idx)
+        self.videos = self.make_dataset(root, class_to_idx) if not balanced else\
+            self.make_balanced_dataset(root, class_to_idx)
         self.root = root
         self.classes = classes
         self.class_to_idx = class_to_idx
@@ -108,6 +101,60 @@ class VideoFolder(data.Dataset):
         self.loader = loader
         self.model = model
         self.size = size
+
+    def make_dataset(self, dir, class_to_idx):
+        ''' This function is for making dataset when data is saved under directory with correct naming.
+        The return value is a tuple: (class, file_path)'''
+
+        videos = []
+        dir = os.path.expanduser(dir)  # expand the user's home directory to a absolute path
+        for target in sorted(os.listdir(dir)):
+            d = os.path.join(dir, target)
+            if not os.path.isdir(d):
+                continue
+
+            for root, _, fnames in sorted(os.walk(d)):
+                for fname in fnames:
+                    if is_video_file(fname):
+                        path = os.path.join(root, fname)
+                        item = (path, class_to_idx[target])
+                        videos.append(item)
+
+        return videos
+
+    def make_balanced_dataset(self, dir, class_to_idx, p=1.2):
+        videos = []
+        self.dataset_count = {}
+        dir = os.path.expanduser(dir)  # expand the user's home directory to a absolute path
+        for target in sorted(os.listdir(dir)):
+            d = os.path.join(dir, target)
+            if not os.path.isdir(d):
+                continue
+            # check the size of the folder, update the min_size
+            length = len([name for name in os.listdir(d) if is_video_file(name)])
+            self.dataset_count[target] = length
+
+        # after we have the min_size of all the categories
+        min_size = min(self.dataset_count.values())
+        threshold = int(1.2 * min_size)
+
+        for target in sorted(os.listdir(dir)):
+            d = os.path.join(dir, target)
+            if not os.path.isdir(d):
+                continue
+
+            fnames = os.listdir(d)
+            if self.dataset_count[target] > threshold:
+                fnames = random.sample(fnames, threshold)
+
+            for fname in fnames:
+                if is_video_file(fname):
+                    path = os.path.join(d, fname)
+                    item = (path, class_to_idx[target])
+                    videos.append(item)
+
+        return videos
+
 
     def __getitem__(self, index):
         """
@@ -130,19 +177,20 @@ class VideoFolder(data.Dataset):
         return len(self.videos)
 
 
+
 # a simple test
 if __name__ == '__main__':
     import time
     root_path = 'E:\\hmdb51_org'
-    full_dataset = VideoFolder(root_path, model='2d')
+    full_dataset = VideoFolder(root_path, model='2d', balanced=True)
     batch_size = 16
 
     train_size = int(0.8 * len(full_dataset))
     val_size = len(full_dataset) - train_size
     dataset_tr, dataset_val = torch.utils.data.random_split(full_dataset, [train_size, val_size])
 
-    dl = torch.utils.data.DataLoader(dataset_tr, batch_size=batch_size, shuffle=True, num_workers=8, pin_memory=True)
-    vdl = torch.utils.data.DataLoader(dataset_val, batch_size=batch_size, shuffle=True, num_workers=8, pin_memory=True)
+    dl = torch.utils.data.DataLoader(dataset_tr, batch_size=batch_size, shuffle=True, num_workers=5, pin_memory=True)
+    vdl = torch.utils.data.DataLoader(dataset_val, batch_size=batch_size, shuffle=True, num_workers=5, pin_memory=True)
 
     dataloader = {'train': dl, 'val': vdl}
 
