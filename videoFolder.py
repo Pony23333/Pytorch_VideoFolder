@@ -32,7 +32,7 @@ def find_classes(dir):
 
 
 
-def video_loader(path, size, model='2d',length=10):
+def video_loader(path, size, length, model='2d'):
     '''
     This function is a novel for video loading. The input video can be in any size
     and any length and equally sample the video with total frames = length. This function
@@ -49,13 +49,13 @@ def video_loader(path, size, model='2d',length=10):
     h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
     w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
     num_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-    if not isinstance(size,tuple):
-        size = (size,size)
+    if not isinstance(size, tuple):
+        size = (size, size)
 
     frames = np.zeros((length, size[0], size[1], 3))
-    rate = int(num_frames/length)
+    rate = num_frames/length
     for f in range(length):
-        cap.set(cv2.CAP_PROP_POS_FRAMES, f*rate)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, int(f*rate))
         ret, frame = cap.read()
         # if the frame is read successfully
         if ret:
@@ -88,7 +88,7 @@ class VideoFolder(data.Dataset):
     :param model: 2d -> return TxCxHxW. 3d -> return CxTxHxW
     :param transform: for data augmentation
     '''
-    def __init__(self, root, model='2d', balanced=False, transform=None, target_transform=None,
+    def __init__(self, root, length=20, model='2d', balanced=False, transform=None, target_transform=None,
                  loader=video_loader, size=112):
         classes, class_to_idx = find_classes(root)
         self.videos = self.make_dataset(root, class_to_idx) if not balanced else\
@@ -101,6 +101,7 @@ class VideoFolder(data.Dataset):
         self.loader = loader
         self.model = model
         self.size = size
+        self.length = length
 
     def make_dataset(self, dir, class_to_idx):
         ''' This function is for making dataset when data is saved under directory with correct naming.
@@ -128,6 +129,7 @@ class VideoFolder(data.Dataset):
         dir = os.path.expanduser(dir)  # expand the user's home directory to a absolute path
         for target in sorted(os.listdir(dir)):
             d = os.path.join(dir, target)
+            # remove files that is not a folder
             if not os.path.isdir(d):
                 continue
             # check the size of the folder, update the min_size
@@ -136,7 +138,7 @@ class VideoFolder(data.Dataset):
 
         # after we have the min_size of all the categories
         min_size = min(self.dataset_count.values())
-        threshold = int(1.2 * min_size)
+        threshold = int(p * min_size)
 
         for target in sorted(os.listdir(dir)):
             d = os.path.join(dir, target)
@@ -144,6 +146,8 @@ class VideoFolder(data.Dataset):
                 continue
 
             fnames = os.listdir(d)
+            # if a folder contains more files that threshold,
+            # randomly sample the number of threshold as full dataset
             if self.dataset_count[target] > threshold:
                 fnames = random.sample(fnames, threshold)
 
@@ -165,7 +169,7 @@ class VideoFolder(data.Dataset):
         """
         path, target = self.videos[index]
 
-        video_frames = self.loader(path, self.size, self.model)
+        video_frames = self.loader(path, self.size, self.length, self.model)
         if self.transform is not None:
             video_frames = self.transform(video_frames)
         if self.target_transform is not None:
@@ -177,12 +181,102 @@ class VideoFolder(data.Dataset):
         return len(self.videos)
 
 
+def new_video_loader(path, size, length, model='2d'):
+    '''
+    This function is a new version for loading video considering different video length.
+
+    :param path: the absolute path of the video file
+    :param size: the expected size of the output in tuple(w, h) or int
+    :param model: 2d -> return TxCxHxW. 3d -> return CxTxHxW
+    :param length: the number of frames extract
+    :return: a np.array whose shape depends on model
+    '''
+
+    cap = cv2.VideoCapture(path)
+
+    h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+    num_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    if not isinstance(size, tuple):
+        size = (size, size)
+
+    frames = np.zeros((length, size[0], size[1], 3))
+
+    # for video shorter than 4s, we sample it from the beginning
+    if 4 * fps > num_frames:
+        rate = int(num_frames / length)
+
+        for f in range(length):
+            cap.set(cv2.CAP_PROP_POS_FRAMES, f*rate)
+
+            ret, frame = cap.read()
+            # if the frame is read successfully
+            if ret:
+                # center crop the frame
+                i = int(round((h - size[0]) / 2.))
+                j = int(round((w - size[1]) / 2.))
+                frame = frame[i:-i, j:-j, :]
+                frames[f, :, :, :] = frame
+            else:
+                # if the video is not long enough, then loop from the beginning
+                cap.set(cv2.CAP_PROP_POS_FRAMES, f*rate-num_frames)
+                ret, frame = cap.read()
+                if ret:
+                    # center crop the frame
+                    i = int(round((h - size[0]) / 2.))
+                    j = int(round((w - size[1]) / 2.))
+                    frame = frame[i:-i, j:-j, :]
+                    frames[f, :, :, :] = frame
+                else:
+                    print("Video {} is Skipped in mode2!".format(path))
+                    break
+
+    # otherwise we sample from the middle 4s
+    else:
+
+        start = int((num_frames - 4 * fps)/2)
+        rate = int(4 * fps / length)
+        for f in range(length):
+            cap.set(cv2.CAP_PROP_POS_FRAMES, start+f*rate)
+
+            ret, frame = cap.read()
+            # if the frame is read successfully
+            if ret:
+                # center crop the frame
+                i = int(round((h - size[0]) / 2.))
+                j = int(round((w - size[1]) / 2.))
+                frame = frame[i:-i, j:-j, :]
+                frames[f, :, :, :] = frame
+            else:
+                print("Video {} is Skipped in mode2!".format(path))
+                break
+
+    frames = frames.astype('float32')
+
+    # 2d -> return TxCxHxW
+    if model=='2d':
+        return frames.transpose([0, 3, 1, 2])
+    # 3d -> return CxTxHxW
+    return frames.transpose([3, 0, 1, 2])
+
+
+class VideoFolderAdv(VideoFolder):
+    '''This is a improved version of VideoLoader, which use a new video loader.'''
+    def __init__(self, root, length=32, model='2d', balanced=False, transform=None, target_transform=None,
+                 loader=new_video_loader, size=112):
+        super().__init__(root, length=32, model='2d', balanced=False, transform=None, target_transform=None,
+                 loader=new_video_loader, size=112)
+
+
+
+
 
 # a simple test
 if __name__ == '__main__':
     import time
     root_path = 'E:\\hmdb51_org'
-    full_dataset = VideoFolder(root_path, model='2d', balanced=True)
+    full_dataset = VideoFolderAdv(root_path, model='2d', balanced=True)
     batch_size = 16
 
     train_size = int(0.8 * len(full_dataset))
@@ -199,7 +293,7 @@ if __name__ == '__main__':
     for i in dl:
         print('loading the {}th video'.format(count))
         count+=1
-        if count>= 9:
+        if count>= 100:
             end_time = time.time()
             break
     print('time cost', end_time - start_time, 's')

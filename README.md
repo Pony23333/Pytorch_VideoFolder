@@ -20,3 +20,11 @@ As currently I'm solving a video classfication task where the data I got for eac
 I modified this videofolder to give it ability of handling unbalanced cases. Generally, the idea is get the size of each category
 and find the minimum size. Then a threshold can be set as p*min_size where p is the portion e.g. 1.2. If a dataset contains more files
 than this threshold, only a certain number of files will be randomly (without replacement) loaded to the dataset. 
+
+## Update 2
+For action recognition problem, there are two cases from the perspective of dataset that is important for the classification result. The first one is when the video is two short, there can be no enough frame to sample. Thus I made the
+new_video_loader to sample frames looply if there such case happens. This made the smapled frames a perodic motion. The second case is that the videos can also be really long, making uniform sample from the beginning to end 
+meaningfulless as the action is not consistent any more. So I changed the sample strategy for this cases: if the video is longer than 4s, sample uniformly at the middle 4s.
+
+## Update 3
+I also added a VisualFolder,py file for visualize the statistical information of the dataset and the classifcation accuracy by class.
